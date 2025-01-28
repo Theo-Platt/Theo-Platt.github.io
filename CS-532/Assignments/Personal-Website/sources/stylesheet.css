@@ -1,0 +1,143 @@
+
+/* .dropdown {
+    position: relative;
+    display: inline-block;
+} */
+
+/* .dropdown-content input label {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+} */
+
+
+
+/* .dropdown:hover .dropbtn {background-color: #3e8e41;} */
+
+
+
+
+
+
+
+/* https://www.w3schools.com/howto/howto_js_toggle_dark_mode.asp */
+body {
+    /* padding-left: 10%;
+    padding-right: 10%; */
+    background-color: white;
+    color: black;
+    font-size: 25px;
+  }
+
+.dark-mode{
+    background-color: black;
+    color: white
+}
+
+
+
+/*******************/
+/* Menu Formatting */
+/*******************/
+
+/* https://www.w3schools.com/howto/howto_css_dropdown.asp */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    color: black;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content input {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content label {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+#nav-menu-current {
+    background-color: #888;
+}
+
+/*********************/
+/* Header Formatting */
+/*********************/
+
+/* https://stackoverflow.com/questions/29578633/how-do-i-place-a-button-next-to-a-heading */
+header {
+    display:flex;
+    /* border: 1px dotted black; */
+    align-items: center; /* Vertical align the elements to the center */
+    background-color: #06afbb;
+    color: white;
+    padding-left: 2%;
+    padding-right: 2%;
+    font-size: 16px;
+    border: none;
+    position: fixed;
+    width:96%;
+    height:75px;
+    top:0;
+    justify-content: space-between;
+  }
+  h1 {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  .navigation {
+    background-color: #03585e;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    margin-right: auto;
+  }
+  .settings {
+    margin-left: auto;
+    background-color: #03585e;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+
+
+/**********************/
+/* Content Formatting */
+/**********************/
+main {
+    width:96%;
+    padding: 2%;
+    background-color:lightgray;
+    padding-top:80px;
+}
+.img {width: 20%;}
+
+
+
+
+/*********************/
+/* Footer Formatting */
+/*********************/
+
+

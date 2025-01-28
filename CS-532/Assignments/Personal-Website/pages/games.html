@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Personal Website - Landing</title>
+
+        <meta name="author" content="Theo Platt">
+        <meta name="description" content="Personal Website Assignment - Homepage">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script type="text/javascript" src="../sources/header.js"></script>
+        <link rel="stylesheet" href="../sources/stylesheet.css">
+    </head>
+
+
+    <body id="body">
+
+
+
+
+        <header id="header">
+            <script>generate_navbar(current_page='games.html', parentID="header")</script>
+            <h1>CS-532 - Personal Website - Hobby: Gaming</h1>
+    
+            <nav class="dropdown">
+                <button class="settings">Settings
+                    <div class="dropdown-content">
+                        <input type="checkbox" id="darkmode" name="darkmode_name" onclick="toggle_darkmode()">
+                        <label for="darkmode">Darkmode</label>
+                    </div>
+                </button>
+            </nav>
+        </header>
+        
+    
+    
+        <br>
+    
+    
+    
+        <main>
+                
+            <div>
+                <h2>Gameplay</h2>
+                <p>I enjoy playing games and, periodically, attempting to make games. Below are some screenshots from games I&apos;m playing recently</p>
+
+                <img src="../sources/img/game1.png" alt="screenshot of a game">
+                <img src="../sources/img/game2.png" alt="screenshot of a game">
+                <img src="../sources/img/game3.png" alt="screenshot of a game">
+                <img src="../sources/img/game4.png" alt="screenshot of a game">
+            </div>
+            <div>
+                <h2>Game Dev</h2>
+                <p>I also dabble in games development. Below is a game I threw together as a learning project for Godot. Note: the game requires a keyboard (sorry mobile users)</p>
+
+                <iframe src="https://theo-platt.github.io/my_game/" title="Shotgun Witch"></iframe>
+                <p>Controls:</p>
+                <ul>
+                    <li>Move left: a</li>
+                    <li>Move Right: d</li>
+                    <li>Jump: Space</li>
+                    <li>Shoot: Left-Click</li>
+                    <li>Reload: r</li>
+                </ul>
+            </div>
+        </main>
+    
+    
+    
+        <br>
+    
+    
+    
+        <footer>
+            <p>Theres some text afoot down here... Who knows what it&apos;s up to.</p>
+        </footer>
+    
+    </body>
+    </html>
