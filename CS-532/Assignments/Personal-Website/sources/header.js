@@ -10,6 +10,7 @@ function generate_navbar(parentID = 'body'){
     //get page so navbar has different color here
     const url = window.location.href;
     const filename = url.split('/').pop();
+    if(filename==`undefined`){filename=`index.html`}
     
     const root = document.getElementById(parentID)
     // Dropdown menu w3schools guide: https://www.w3schools.com/howto/howto_css_dropdown.asp
