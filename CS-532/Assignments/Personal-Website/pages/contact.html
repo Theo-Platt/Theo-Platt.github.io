@@ -18,17 +18,19 @@
 
 
         <header id="header">
-            <script>generate_navbar(current_page='contacts.html', parentID="header")</script>
-            <h1>CS-532 - Personal Website - Contact Info</h1>
+            <script>
+                generate_navbar(parentID="header")
+                generate_header(parentID="header")
+            </script>
     
-            <nav class="dropdown">
+            <div class="dropdown">
                 <button class="settings">Settings
                     <div class="dropdown-content">
-                        <input type="checkbox" id="darkmode" name="darkmode_name" onclick="toggle_darkmode()">
+                        <input type="checkbox" id="darkmode" name="darkmode_name" onclick="toggle_darkmode(this.checked)">
                         <label for="darkmode">Darkmode</label>
                     </div>
                 </button>
-            </nav>
+            </div>
         </header>
         
     
@@ -37,7 +39,7 @@
     
     
     
-        <main>
+        <main id="main">
             <h2>Professional</h2>
             <ul>
                 <li>Email: theop@nmsu.edu</li>
@@ -48,6 +50,8 @@
                 <li>Discord: Robo_Banana</li>
                 <li>Steam: Robo_Banana</li>
             </ul>
+
+            <p>The best way to reach me is via discord message or email. Un-prompted phonecalls will be ignored, thus the number is not provided.</p>
         </main>
     
     
@@ -56,9 +60,11 @@
     
     
     
-        <footer>
-            <p>Did you know, this bottom section is a footer? Who knows what the expectations are for using this space on the page.</p>
+        <footer id="footer">
+            <p>&copy;2025 Theo Platt, Unless otherwise specified, use only per <a href="./license.html">license</a></p>
         </footer>
     
+        <script>load_darkmode()</script>
+
     </body>
     </html>

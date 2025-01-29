@@ -15,21 +15,22 @@
     <body id="body">
 
 
-
-
         <header id="header">
-            <script>generate_navbar(current_page='research.html', parentID="header")</script>
-            <h1>CS-532 - Personal Website - Projects: Research</h1>
+            <script>
+                generate_navbar(parentID="header")
+                generate_header(parentID="header")
+            </script>
     
-            <nav class="dropdown">
+            <div class="dropdown">
                 <button class="settings">Settings
                     <div class="dropdown-content">
-                        <input type="checkbox" id="darkmode" name="darkmode_name" onclick="toggle_darkmode()">
+                        <input type="checkbox" id="darkmode" name="darkmode_name" onclick="toggle_darkmode(this.checked)">
                         <label for="darkmode">Darkmode</label>
                     </div>
                 </button>
-            </nav>
+            </div>
         </header>
+
         
     
     
@@ -37,7 +38,7 @@
     
     
     
-        <main>
+        <main id="main">
             <div>
                 <img class="img" src="../sources/img/meAtCHI.jpg" alt="Photograph of Theo Platt at the CHI2024 venue.">
             </div>
@@ -56,9 +57,10 @@
     
     
     
-        <footer>
-            <p>The assignment requires a footer. Here is a footer. (what goes here?)</p>
+        <footer id="footer">
+            <p>&copy;2025 Theo Platt, Unless otherwise specified, use only per <a href="./license.html">license</a></p>
         </footer>
     
+        <script>load_darkmode()</script>
     </body>
     </html>

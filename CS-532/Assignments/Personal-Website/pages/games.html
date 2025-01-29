@@ -18,17 +18,19 @@
 
 
         <header id="header">
-            <script>generate_navbar(current_page='games.html', parentID="header")</script>
-            <h1>CS-532 - Personal Website - Hobby: Gaming</h1>
+            <script>
+                generate_navbar(parentID="header")
+                generate_header(parentID="header")
+            </script>
     
-            <nav class="dropdown">
+            <div class="dropdown">
                 <button class="settings">Settings
                     <div class="dropdown-content">
-                        <input type="checkbox" id="darkmode" name="darkmode_name" onclick="toggle_darkmode()">
+                        <input type="checkbox" id="darkmode" name="darkmode_name" onclick="toggle_darkmode(this.checked)">
                         <label for="darkmode">Darkmode</label>
                     </div>
                 </button>
-            </nav>
+            </div>
         </header>
         
     
@@ -37,7 +39,7 @@
     
     
     
-        <main>
+        <main id="main">
                 
             <div>
                 <h2>Gameplay</h2>
@@ -70,9 +72,11 @@
     
     
     
-        <footer>
-            <p>Theres some text afoot down here... Who knows what it&apos;s up to.</p>
+        <footer id="footer">
+            <p>&copy;2025 Theo Platt, Unless otherwise specified, use only per <a href="./license.html">license</a></p>
         </footer>
     
+        <script>load_darkmode()</script>
+
     </body>
     </html>
