@@ -18,6 +18,7 @@ function generate_navbar(parentID = 'body'){
     // open the header, setup dropdown menu div
     const nav = document.createElement(`div`)
     nav.className="dropdown"
+    nav.id="div-nav"
     
 
     const button = document.createElement(`button`)
@@ -26,6 +27,7 @@ function generate_navbar(parentID = 'body'){
 
     const div    = document.createElement(`div`)
     div.className = "dropdown-content"
+    div.id=`dc-nav`
     
     // create entry for all pages except current page
     for(key of Object.keys(pages)){

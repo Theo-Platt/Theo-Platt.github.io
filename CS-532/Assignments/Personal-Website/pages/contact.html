@@ -14,18 +14,15 @@
 
     <body id="body">
 
-
-
-
         <header id="header">
             <script>
                 generate_navbar(parentID="header")
                 generate_header(parentID="header")
             </script>
     
-            <div class="dropdown">
+            <div id="div-settings" class="dropdown">
                 <button class="settings">Settings
-                    <div class="dropdown-content">
+                    <div id="dc-set" class="dropdown-content">
                         <input type="checkbox" id="darkmode" name="darkmode_name" onclick="toggle_darkmode(this.checked)">
                         <label for="darkmode">Darkmode</label>
                     </div>

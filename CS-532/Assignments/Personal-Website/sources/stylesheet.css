@@ -68,6 +68,13 @@ body {
     text-decoration: none;
     display: block;
 }
+#dc-nav{
+left:2.5%
+}
+
+#dc-set{
+right:2.5%;
+}
 
 .dropdown-content a:hover {background-color: #ddd;}
 
@@ -75,6 +82,10 @@ body {
 
 #nav-menu-current {
     background-color: #888;
+}
+
+#darkmode{
+    height:fill;
 }
 
 /*********************/
@@ -85,30 +96,55 @@ body {
 /* https://stackoverflow.com/questions/29578633/how-do-i-place-a-button-next-to-a-heading */
 header {
     display:flex;
-    /* border: 1px dotted black; */
-    align-items: center; /* Vertical align the elements to the center */
-    background-color: #8c0b42;
-    color: white;
-    /* margin-left: 2%;
-    margin-right: 2%; */
-    /* font-size: 16px; */
+    align-items: center;
+    justify-content: space-between;
     border: none;
     padding:none;
     position: fixed;
     width:100%;
     height:10%;
+    min-height: 20px;
     top:0;
+    left:0;
+    font-size: 2vh;
+    background-color: #8c0b42;
+    color: white;
+    /* margin-left: 2%;
+    margin-right: 2%; */
+    /* font-size: 16px; */
+    
+  }
+  .menus{
+    display:flex;
+    width:100%;
     justify-content: space-between;
+    gap:10px;
+    position:fixed
+  }
+  .titles{
+    display:flex;
+    width:100%;
+    justify-content: center;
+    gap:10px;
+    /* position:relative */
+  }
+
+  #div-nav{
+    margin-left: 2.5%;
+  }
+  #div-settings{
+    margin-right: 2.5%;
   }
   h1 {
     margin-left: 5%;
     margin-right: 5%;
+    font-size: 2vh;
   }
   .navigation {
     background-color: #800040;
     color: white;
     padding: 16px;
-    font-size: 16px;
+    font-size: 2vh;
     border: none;
     margin-right: auto;
   }
@@ -117,7 +153,8 @@ header {
     background-color: #800040;
     color: white;
     padding: 16px;
-    /* font-size: 16px; */
+    /* border-left:50px; */
+    font-size: 2vh;
     border: none;
   }
 
@@ -134,9 +171,26 @@ main {
     height:100%;
     padding: none;
     /* background-color:lightgray; */
-    padding-top:80px;
+    padding-top:10%;
+    padding-bottom:10%
 }
 .img {width: 20%;}
+
+
+/* flex stuff from Bill's lecture slides (thanks for that) */
+.flex-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.flex-container img {
+    height:150px;
+    margin:10px;
+    text-align:center;
+    line-height:75px;
+    font-size:16px;
+}
 
 
 
@@ -157,8 +211,9 @@ footer {
   border: none;
   position: fixed;
   width:100%;
-  height:10%px;
+  height:10%;
   bottom:0;
+  left:0;
   justify-content:center;
 }
 
@@ -167,8 +222,25 @@ footer {
 /*****************/
 /* @media stuffs */
 /*****************/
-@media (max-width: 700px) {
-  
+@media (max-width:700px) {
+  header {
+    display: flex;
+    flex-direction: column;
+    text-align:center;
+    height:15%;
+  }
+  /* .menus{
+    flex-direction:row;
+    justify-content:center;
+    gap:10px;
+  } */
+  .titles{
+    margin-top:15%
+  }
+
+  main{
+    padding-top:30%;
+  }
 }
 
 @media (min-width: 700px) {
@@ -231,5 +303,13 @@ footer.dark-mode{
  ()=()
 
 The code bunny is here to motivate you.
- 
+They gaze deep into your soul.
+The bunny desires productivity,
+Lest they put you in a hole.
+
+The bunny does not make threats,
+For those would be obstructive.
+Do not fear the bunny;
+Terror is quite unproductive. 
+
  */
