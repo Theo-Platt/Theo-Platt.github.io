@@ -10,7 +10,6 @@ function generate_navbar(parentID = 'body'){
     //get page so navbar has different color here
     const url = window.location.href;
     const filename = url.split('/').pop();
-    if(filename==`undefined`){filename=`index.html`}
     
     const root = document.getElementById(parentID)
     // Dropdown menu w3schools guide: https://www.w3schools.com/howto/howto_css_dropdown.asp
@@ -57,7 +56,7 @@ function generate_header(parentID=`body`){
 
     const root = document.getElementById(parentID)
     const h1 = document.createElement(`h1`)
-    h1.innerHTML=`CS-532 Personal Website - ${pages[filename]}`
+    h1.innerHTML=`CS-532 Personal Website - ${(pages[filename]!=undefined) ? pages[filename] : "Home"}`
     root.appendChild(h1)
 }
 
