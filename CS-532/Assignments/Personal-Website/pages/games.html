@@ -18,19 +18,31 @@
 
 
         <header id="header">
-            <script>
-                generate_navbar(parentID="header")
-                generate_header(parentID="header")
-            </script>
+
+            <!-- menus has the navbar and settings button -->
+            <div id="menus" class="menus">
     
-            <div id="div-settings" class="dropdown">
-                <button class="settings">Settings
-                    <div id="dc-set" class="dropdown-content">
-                        <input type="checkbox" id="darkmode" name="darkmode_name" onclick="toggle_darkmode(this.checked)">
-                        <label for="darkmode">Darkmode</label>
-                    </div>
-                </button>
+                <script>
+                    generate_navbar(parentID="menus")
+                </script>
+    
+                <div id="div-settings" class="dropdown">
+                    <button class="settings">Settings
+                        <div id="dc-set" class="dropdown-content">
+                            <input type="checkbox" id="darkmode" name="darkmode_name" onclick="toggle_darkmode(this.checked)">
+                            <label for="darkmode">Darkmode</label>
+                        </div>
+                    </button>
+                </div>
             </div>
+    
+            <!-- titles has the page's title -->
+            <div id="titles" class="titles">
+                <script>
+                    generate_header(parentID="titles")
+                </script>
+            </div>
+            
         </header>
         
     
