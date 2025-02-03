@@ -193,6 +193,11 @@ main {
     font-size:16px;
 }
 
+iframe {
+  width:75vw;
+  height: 45vw;
+  /* justify-content: center; */
+}
 
 
 
