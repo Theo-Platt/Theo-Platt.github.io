@@ -1,0 +1,53 @@
+
+
+
+
+table{
+    margin:auto;
+    width:50vw;
+    border:none;
+    padding:none;
+    max-width: 100%;
+    background-color: black;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+td{
+    width: 1px;
+    height:1px;
+    position: relative;
+    background-color:darkgrey;
+    border:none;
+    padding:none;
+
+}
+td:after {
+    content: '';
+    display: block;
+    /* margin-top: 100%; */
+    border:none;
+    padding:none;
+  }
+  td .content {
+    position: absolute;
+    /* top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; */
+    border:none;
+    padding:none;
+
+  }
+
+td.Player1{
+    background-color: red;
+}
+td.Player2{
+    background-color: blue;
+}
+td.Player3{
+    background-color: green;
+}
+td.Player4{
+    background-color: yellow;
+}
