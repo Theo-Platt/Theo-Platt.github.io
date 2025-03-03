@@ -1,10 +1,43 @@
+header h1{
+    width: 100%;
+    
+}
+body{
+    overflow: hidden;
+}
 
+#menuHolder{
+    margin:auto;
+    width:50vw;
+    padding-top:5px;
+}
+#menuHolder button{
+    margin:auto;
+}
 
+#gameLog{
+    display: flex;
+    flex-direction: column-reverse;
+    overflow-y: auto;
+    height:100px;
+    max-height: 100px;
+    border:1px;
+    border-style:ridge;
+    border-color: black;
+    width:50vw;
+    margin:auto;
+    padding:0px;
+    padding-top:20px;
+    background-color: #eee;
+    list-style-type: none;
+    font-size:small;
+}
 
+#gameLog li:nth-child(odd) { background: #ddd; }
 
 table{
     margin:auto;
-    width:50vw;
+    height:100px;
     border:none;
     padding:none;
     max-width: 100%;
@@ -40,14 +73,20 @@ td:after {
   }
 
 td.Player1{
-    background-color: red;
+    background-color: blue;
 }
 td.Player2{
-    background-color: blue;
+    background-color: red;
 }
 td.Player3{
     background-color: green;
 }
 td.Player4{
     background-color: yellow;
+}
+
+/* https://stackoverflow.com/questions/18614301/keep-overflow-div-scrolled-to-bottom-unless-user-scrolls-up */
+.hidden{
+    display:none
+    
 }

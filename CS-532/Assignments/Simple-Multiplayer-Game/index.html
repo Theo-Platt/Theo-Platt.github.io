@@ -3,21 +3,37 @@
     <head>
         <meta name="author" content="Theo Platt">
         <meta title="Simple-Multiplayer-Game">
-        <meta name="description" content="Personal Website Assignment - Homepage">
+        <meta name="description" content="This page contains the submission for the Simple-Multiplayer-Game assignment in NMSU's CS532;Modern-Web-Technologies course. This submission is a simple clone of snake/tron allowing two players to start a game and play against eachother.">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <script type="text/javascript" src="./gameScript.js"></script>
-        <script type="text/javascript" src="./menuScript.js"></script>
         <link rel="stylesheet" href="./stylesheet.css">
+        <link rel="stylesheet" href="./Personal-Website_stylesheet.css">
     </head>
-    <body>
+    <body id="body" onload="onload()">
 
-        <div id="tableHolder"></div>
-        <script>gamesetup()</script>
+        <header id="header">
+            <h1>CS532: Simple Multiplayer Game</h1>
+        </header>
 
-        <div id="menuHolder">
+        <main>
+
+            <div id="tableHolder"></div>
             
-        </div>
+            <div id="textHolder">
+                <ul id="gameLog"></ul>
+            </div>
+
+            <div id="menuHolder">
+                <button id="startButton" type="button" onclick="gamesetup()">Start Game.</button>
+
+            </div>
+
+        </main>
+
+        <footer id="footer">
+            <p>&copy;2025 Theo Platt, Unless otherwise specified, use only per <a href="https://theo-platt.github.io/CS-532/Assignments/Personal-Website/pages/license.html">license</a></p>
+        </footer>
 
     </body>
 </html>
