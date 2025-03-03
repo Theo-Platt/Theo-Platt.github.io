@@ -1,0 +1,16 @@
+{
+  "name": "distributed-multiplayer-game",
+  "version": "1.0.0",
+  "description": "Creating a node project which hosts a distributed version of the Simple-Multiplayer-Game assignment",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Theoderic Platt",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "path": "^0.12.7",
+    "socket.io": "^4.8.1"
+  }
+}

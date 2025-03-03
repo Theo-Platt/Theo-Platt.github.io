@@ -1,0 +1,17 @@
+Author: Theo Platt
+Course: CS-532-M01 Modern Web Technologies; Dr. Bill Hamilton
+Assignment: Individual Assignment: Simple Multiplayer Game
+Deadline: 03/03/2025
+GitHub Pages: https://theo-platt.github.io/CS-532/Assignments/Simple-Multiplayer-Game/
+Description:  In this assignment I create a simple multiplayer game which allows two players to compete in a game of snek.
+Files included:
+    /readme.txt 
+    /index.html 
+    /stylesheet.css 
+    /Personal-Website_stylesheet.css
+    /favicon.png
+    /gameScript.js 
+
+How to play: Players control a snek (legally distinct from snake) that moves forward and leaves a tail wherever it goes. If a player collides with any snek, or a map edge they lose.
+Player 1 Controls: wasd
+Player 2 Controls: arrow keys
