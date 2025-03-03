@@ -40,8 +40,8 @@ io.on('connection', (socket) => {
     }
     let msg={
         usr:undefined,
-        msg:"Connected.",
-        usr:socket
+        str:"Connected.",
+        sock:socket.id
     }
     // socket.emit('update chatlog')
     socket.emit('update chatlog',msg)

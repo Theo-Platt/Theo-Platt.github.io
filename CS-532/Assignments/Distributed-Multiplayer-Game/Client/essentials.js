@@ -9,6 +9,7 @@ function updateChatlog(str, usr){
 }
 
 socket.on('update chatlog',function(msg){
+    console.log(msg)
     let text
     if(msg.usr==undefined){
         text = `${msg.usr}: ${msg.str}`
