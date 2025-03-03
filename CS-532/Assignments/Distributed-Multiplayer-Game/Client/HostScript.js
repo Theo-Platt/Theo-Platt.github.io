@@ -1,6 +1,6 @@
-const Snek = require('./Snek.js')
-const GameBoard = require('./GameBoard.js')
-
+import {Snek} from 'Snek.mjs'
+import {GameBoard} from './GameBoard.mjs'
+console.log("Host Script Running!")
 let board = new GameBoard()
 
 let players = {}

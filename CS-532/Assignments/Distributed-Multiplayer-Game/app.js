@@ -13,14 +13,6 @@ app.get('/', (req, res) => {
     res.end()
 })
 
-app.get('/Host',(req,res) =>{
-    res.sendFile(require('./Host/Snek.js'))
-    res.sendFile(require('./Host/GameBoard.js'))
-    res.sendFile(require('./Host/HostScript.js'))
-    res.end()
-})
-
-
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 
@@ -31,8 +23,9 @@ let connected = {}
 io.on('connection', (socket) => {
 
     //What to do when first connecting
-    console.log('a user connected');
+    console.log(`a user connected with ID: ${socket.id}`);
     if(host==null){
+        console.log(`New Host: ${socket.id}`)
         host = socket.id
     }
     if(host==socket.id){
@@ -48,7 +41,9 @@ io.on('connection', (socket) => {
 
     //extra stuff
     socket.on('disconnect', () => {
-      console.log('user disconnected');
+        if(host==socket.id)
+            host=null
+      console.log(`user disconnected: ${socket.id}`);
     });
 });
 

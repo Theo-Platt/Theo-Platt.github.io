@@ -11,7 +11,7 @@ function updateChatlog(str, usr){
 socket.on('update chatlog',function(msg){
     console.log(msg)
     let text
-    if(msg.usr==undefined){
+    if(msg.usr!=undefined){
         text = `${msg.usr}: ${msg.str}`
     }else{
         text = `Server: ${msg.str}`
@@ -26,22 +26,20 @@ socket.on('GameLoop',function(board){
 })
 
 socket.on('Host Notification',function(){
-    draw(board)
-    fetch('/Host')
-    .then(response=>{
-        if(!response.ok){
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        Snek = require('./Snek.js')
-        GameBoard = require('./GameBoard.js')
-        HostScript = require('./HostScript.js')
-    })
-    .then(()=>{
-        console.log('Recieved Host Scripts')
-    })
-    .catch(error => {
-        console.error("There was a problem with the fetch operation:", error);
-    });
+    console.log("I am the host.")
+    let s1=document.createElement('script')
+    s1.src='GameBoard.mjs'
+    s1.type="module"
+    document.getElementById('body').appendChild(s1)
+    
+    let s2=document.createElement('script')
+    s2.src='Snek.mjs'
+    s2.type="module"
+    document.getElementById('body').appendChild(s2)
+
+    let s3=document.createElement('script')
+    s3.src='HostScript.js'
+    document.getElementById('body').appendChild(s3)
 })
 
 
