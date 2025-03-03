@@ -110,9 +110,9 @@ async function gamesetup(){
 
     // run the game
     gameloop()
-    print_gamelog("Get Ready!")
+    print_gamelog("Get Ready.")
     await sleep(1000)
-    print_gamelog("Get Set!")
+    print_gamelog("Get Set.")
     await sleep(1000)
     print_gamelog("Go!")
     gameloop_timer_start()
@@ -166,7 +166,7 @@ function gameloop(){
                 winner = player.name
             }
             else{
-                print_gamelog(player.name + " Died!", player.name)
+                print_gamelog(player.name + " Died.", player.name)
                 player.alive=0
             }
         }
