@@ -103,8 +103,8 @@ async function gamesetup(){
     document.getElementById("startButton").classList.toggle(`hidden`,true)
 
     // Create the snakes
-    players.P1 = new Snek("Player1", "KeyW",    "KeyS",      "KeyA",      "KeyD",       direction.RIGHT, 2,         2,         50);
-    players.P2 = new Snek("Player2", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", direction.LEFT,  numRows-3, numCols-3, 50);
+    players.P1 = new Snek("Player1", "KeyW",    "KeyS",      "KeyA",      "KeyD",       direction.RIGHT, 2,         2,         300);
+    players.P2 = new Snek("Player2", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", direction.LEFT,  numRows-3, numCols-3, 300);
     // players.P3 = new Snek("Player3", "KeyW",    "KeyS",      "KeyA",      "KeyD",       direction.DOWN,  numRows-3, 2);
     // players.P4 = new Snek("Player4", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", direction.UP,    2,         numCols-3);
 
