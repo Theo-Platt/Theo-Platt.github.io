@@ -36,9 +36,11 @@ body{
 #gameLog li:nth-child(odd) { background: #ddd; }
 
 table{
+    border:1px;
+    border-style:ridge;
+    border-color: black;
     margin:auto;
     height:100px;
-    border:none;
     padding:none;
     max-width: 100%;
     background-color: black;

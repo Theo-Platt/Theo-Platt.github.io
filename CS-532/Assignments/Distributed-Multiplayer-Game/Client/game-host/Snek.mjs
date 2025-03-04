@@ -10,7 +10,7 @@ export class Snek{
         this.tail = tail;
 
         //state tracking
-        this.alive = 2
+        this.alive = true
     }
 
     //change the current direction of the snek, but do not allow full turn-arounds

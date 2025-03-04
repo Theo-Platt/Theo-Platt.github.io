@@ -18,33 +18,86 @@ var io = require('socket.io')(http);
 
 
 // Handle socket stuff
-let host = null
-let connected = {}
+let hosts = {}
+let sockmap = {}
 io.on('connection', (socket) => {
+    
+    // When a user connects, assign them a room and make them host if needed.
+    socket.emit('request fragment')
+    socket.on('request fragment',(frag)=>{
+        socket.join(`#${frag}`)
+        if(hosts[`#${frag}`]==null){
+            hosts[`#${frag}`]=socket.id
+            socket.emit('Host Notification')
+            console.log(hosts)
+        }else{
+            socket.emit('Non-Host Notification')
+        }
+        socket.emit('Chatbox Message',{ str:`Joined room '${frag}'.` })
+        console.log(socket.id + " connected to "+Array.from(socket.rooms)[1])
+    })
 
-    //What to do when first connecting
-    console.log(`a user connected with ID: ${socket.id}`);
-    if(host==null){
-        console.log(`New Host: ${socket.id}`)
-        host = socket.id
-    }
-    if(host==socket.id){
-        socket.emit('Host Notification')
-    }
-    let msg={
-        usr:undefined,
-        str:"Connected.",
-        sock:socket.id
-    }
-    // socket.emit('update chatlog')
-    socket.emit('update chatlog',msg)
+    // When a user disconnects, remove them from their room and migrate hosts if needed.
+    socket.on('disconnecting', () => {
 
-    //extra stuff
-    socket.on('disconnect', () => {
-        if(host==socket.id)
-            host=null
-      console.log(`user disconnected: ${socket.id}`);
+        let room = Array.from(socket.rooms)[1]
+        let host = hosts[`${room}`]
+        if(host==socket.id){
+            console.log(`Migrating Host for ${room}`)
+            hosts[room]=null
+            io.to(`#${room}`).emit('Host Migration')
+        }
+        else{
+            console.log(`${socket.id} has disconnected from ${room}`)
+            io.to(host).emit('player disconnect', socket.id)
+        }
     });
+
+
+    
+
+    // Chat
+    socket.on('Chatbox Message',(msg)=>{
+        let room = Array.from(socket.rooms)[1]
+        io.to(room).emit('Chatbox Message',msg)
+    })
+    socket.on('Chatbox Message-b',(msg)=>{
+        let room = Array.from(socket.rooms)[1]
+        socket.broadcast.to(room).emit('Chatbox Message',msg)
+    })
+
+    socket.on('Server Message',(msg)=>{
+        let room = Array.from(socket.rooms)[1]
+        io.to(room).emit('Server Message', msg)
+    })
+
+    // Graphics
+    socket.on('GameLoop',(msg)=>{
+        let room = Array.from(socket.rooms)[1]
+        io.to(room).emit('GameLoop', msg)
+    })
+
+    // Controls
+    socket.on('input',(msg)=>{
+        newmsg = {
+            id:socket.id,
+            dir:msg
+        }
+        let room = Array.from(socket.rooms)[1]
+        let host = hosts[`${room}`]
+        io.to(host).emit('input', newmsg)
+        console.log(`${newmsg} in room ${room} hosted by ${host}`)
+    })
+
+    // Game Joining 
+    socket.on('Join Game',(msg)=>{
+        let room = Array.from(socket.rooms)[1]
+        let host = hosts[`${room}`]
+        io.to(host).emit('Join Game', socket.id)
+        console.log(`${socket.id} joined ${room} hosted by ${host}`)
+    })
+
+    
 });
 
 // Listen on the port
