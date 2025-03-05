@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const path = require('path');
-const port = 3000
+const port = 3500
 
 
 //middleware
@@ -26,31 +26,32 @@ io.on('connection', (socket) => {
     socket.emit('request fragment')
     socket.on('request fragment',(frag)=>{
         socket.join(`#${frag}`)
-        if(hosts[`#${frag}`]==null){
-            hosts[`#${frag}`]=socket.id
+        let room = Array.from(socket.rooms)[1]
+        if(hosts[room]==null || hosts[room]==undefined){
+            hosts[room]=socket.id
             socket.emit('Host Notification')
-            console.log(hosts)
         }else{
             socket.emit('Non-Host Notification')
         }
         socket.emit('Chatbox Message',{ str:`Joined room '${frag}'.` })
-        console.log(socket.id + " connected to "+Array.from(socket.rooms)[1])
+        
     })
 
     // When a user disconnects, remove them from their room and migrate hosts if needed.
-    socket.on('disconnecting', () => {
-
+    socket.on('closing', () => {
+        
         let room = Array.from(socket.rooms)[1]
         let host = hosts[`${room}`]
         if(host==socket.id){
-            console.log(`Migrating Host for ${room}`)
+            console.log(`\nMigrating Host for ${room}`)
             hosts[room]=null
-            io.to(`#${room}`).emit('Host Migration')
+            io.to(`${room}`).emit('Host Migration')
         }
         else{
-            console.log(`${socket.id} has disconnected from ${room}`)
             io.to(host).emit('player disconnect', socket.id)
         }
+        if(host!=null)
+            console.log(`${socket.id} has disconnected from ${room}`)
     });
 
 
@@ -94,7 +95,10 @@ io.on('connection', (socket) => {
         let room = Array.from(socket.rooms)[1]
         let host = hosts[`${room}`]
         io.to(host).emit('Join Game', socket.id)
-        console.log(`${socket.id} joined ${room} hosted by ${host}`)
+        if(socket.id == host)
+            console.log(`Client '${socket.id}' joined ${room} as host`)
+        else
+            console.log(`Client '${socket.id}' joined ${room} hosted by '${hosts[room]}'`)
     })
 
     

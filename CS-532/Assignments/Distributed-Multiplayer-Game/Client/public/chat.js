@@ -13,14 +13,7 @@ socket.on('Chatbox Message',function(msg){
 });
 
 
-// Socket handler for when the server messages the client directly
-socket.on('Server Message', (msg)=>{
-    if(socket.id == msg.id){
-        print_gamelog(`Server : ${msg.content}`)
-        if(msg.emit != null)
-            emitMessage(msg.emit.message,msg.emit.sender,true)
-    }        
-})
+
 
 
 // Emits a message telling all clients to do print_gamelog()

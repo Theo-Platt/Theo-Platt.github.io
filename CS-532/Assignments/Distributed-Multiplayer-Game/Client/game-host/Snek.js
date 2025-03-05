@@ -1,4 +1,4 @@
-export class Snek{
+class Snek{
 
     constructor(id, name, facing, posX, posY, tail){
         // object metadata

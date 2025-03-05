@@ -8,37 +8,39 @@ socket.on('request fragment',()=>{
 })
 
 socket.on('Host Migration',()=>{
+    console.log("Migrating Host")
     window.location.reload(true);
+})
+
+
+socket.on('Server Message', (msg)=>{
+    if(socket.id == msg.id){
+        print_gamelog(`Server : ${msg.content}`)
+        if(msg.emit != null)
+            emitMessage(msg.emit.message,msg.emit.sender,true)
+        if(msg.role != undefined){
+            role = msg.role
+            enableKeyboardListener()
+        }
+    }        
+})
+
+
+window.addEventListener("beforeunload",()=>{
+    socket.emit('closing')
 })
 
 
 socket.on('Host Notification',async function(){
     console.log("I am the host.")
-    
-
-    let s1=document.createElement('script')
-    s1.src='./game-host/GameBoard.mjs'
-    s1.type="module"
-    document.getElementById('head').appendChild(s1)
-    
-    let s2=document.createElement('script')
-    s2.src='./game-host/Snek.mjs'
-    s2.type="module"
-    document.getElementById('head').appendChild(s2)
-
-    let s3=document.createElement('script')
-    s3.src='./game-host/gameLogic.js'
-    s3.type="module"
-    document.getElementById('head').appendChild(s3)
-
-    await sleep(100)
+    Assigned_Host_Role()
+    document.getElementById('startButton').onclick = gamesetup
     socket.emit('Join Game',{id:null,name:null})
-
 })
 
 socket.on('Non-Host Notification',async function(){
+    console.log("I am not the host.")
     document.getElementById('startButton').classList.add('hidden',true)
-    await sleep(100)
     socket.emit('Join Game',{id:null,name:null})
 })
 

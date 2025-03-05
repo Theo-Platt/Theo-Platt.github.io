@@ -1,4 +1,4 @@
-export class GameBoard{
+class GameBoard{
 
     constructor(){
         this.boardState = {}

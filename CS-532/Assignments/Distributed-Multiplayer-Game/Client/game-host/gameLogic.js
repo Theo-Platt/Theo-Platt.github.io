@@ -1,16 +1,3 @@
-import {Snek} from './Snek.mjs'
-import {GameBoard} from './GameBoard.mjs'
-var board = new GameBoard()
-var gameRunning = false
-
-var players = {
-    "P1":null,
-    "P2":null,
-    "P3":null,
-    "P4":null
-}
-
-var socks = {}
 
 const starter = {
     "P1":{"name":"Player1", "dir":direction.RIGHT, "posX":2,         "posY":2},
@@ -18,66 +5,91 @@ const starter = {
     "P3":{"name":"Player3", "dir":direction.LEFT,  "posX":numRows-3, "posY":2},
     "P4":{"name":"Player4", "dir":direction.UP,    "posX":2,         "posY":numCols-3}
 }
-
 let intervalId=null;
+var board = undefined
+var gameRunning = undefined
+var players = undefined
+var socks = undefined
 
-socket.on('Join Game',function(player){
-    console.log(`new joiner: ${player}`)
-    let playerAdded=false
-    console.log(players)
-    for(let k of Object.keys(players)){
-        if(gameRunning) break
-        
-        if(players[`${k}`]==null){
-            let start = starter[`${k}`]
-            players[`${k}`] = new Snek(player,start.name,start.dir, start.posX,start.posY, 100)
+
+function Assigned_Host_Role(){
+    board = new GameBoard()
+    gameRunning = false
+    socks = {}
+    players = {
+        "P1":null,
+        "P2":null,
+        "P3":null,
+        "P4":null
+    }
+
+    socket.on('Join Game',function(player){
+        let playerAdded=false
+        console.log(players)
+        for(let k of Object.keys(players)){
+            if(gameRunning) break
+            
+            if(players[`${k}`]==null){
+                let start = starter[`${k}`]
+                players[`${k}`] = new Snek(player,start.name,start.dir, start.posX,start.posY, 100)
+                let msg={
+                    id:player,
+                    content:`You are ${players[`${k}`].name}`,
+                    emit:{sender:`${players[`${k}`].name}`,message:`Joined the game.`},
+                    role:"Player"
+                }
+                socket.emit('Server Message',msg)
+                playerAdded=true
+                console.log(`Assigned ${players[`${k}`].name}`)
+                break
+            }
+        }
+        if(!playerAdded){
             let msg={
                 id:player,
-                content:`You are ${players[`${k}`].name}`,
-                emit:{sender:`${players[`${k}`].name}`,message:`Joined the game.`}
+                content:`You are a Spectator`,
+                emit:{sender:`Spectator`,message:`Joined the game.`},
+                role:"spectator"
             }
             socket.emit('Server Message',msg)
-            playerAdded=true
-            console.log(`Assigned ${players[`${k}`].name}`)
-            break
         }
-    }
-    if(!playerAdded){
-        let msg={
-            id:player,
-            content:`You are a Spectator`,
-            emit:{sender:`Spectator`,message:`Joined the game.`}
+        console.log(players)
+    });
+    
+    
+    socket.on('player disconnect',(id)=>{
+        console.log(`Player Disconnected`)
+        for(let p of Object.keys(players)){
+            if(players[`${p}`] != null && players[`${p}`].id==id){
+                console.log(`Removing ${players[`${p}`].name}`)
+                emitMessage(`Disconnected.`,players[`${p}`].name)
+                players[`${p}`] = null
+            }
         }
-        socket.emit('Server Message',msg)
-    }
-    console.log(players)
-});
-
-
-socket.on('player disconnect',(id)=>{
-    console.log(`Player Disconnected`)
-    for(let p of Object.keys(players)){
-        if(players[`${p}`] != null && players[`${p}`].id==id){
-            console.log(`Removing ${players[`${p}`].name}`)
-            emitMessage(`Disconnected.`,players[`${p}`].name)
-            players[`${p}`] = null
+    })
+    
+    socket.on('input',(msg)=>{
+        if(gameRunning){
+            let id = msg.id
+            let dir = msg.dir
+    
+            players[socks[id]].setDirection(dir)
         }
-    }
-})
-
-socket.on('input',(msg)=>{
-    if(gameRunning){
-        let id = msg.id
-        let dir = msg.dir
-
-        players[socks[id]].setDirection(dir)
-    }
-})
+    })
+}
 
 
 
 
-document.getElementById('startButton').onclick = gamesetup
+
+
+
+
+
+
+
+
+
 
 // Runs once upon the page being loaded and/or when the 'newgame' button is pressed
 async function gamesetup(){
@@ -113,7 +125,6 @@ async function gamesetup(){
 }
 
 function gamecleanup(){
-    console.log('game cleanup running')
     board.resetGameBoard()
 
     socket.emit('GameLoop',board.getGameBoard())
@@ -123,12 +134,7 @@ function gamecleanup(){
         if(players[key] != null)
             players[key] = new Snek(players[key].id, starter[key].name, starter[key].dir, starter[key].posX, starter[key].posY, 100)
     }
-
-    gameRunning = false
 }
-
-
-//thanks to google's AI overview on the search criteria: "js timer interrupt routine" (just citing sources ^-^)
 
 
 function timer_start() {
@@ -139,7 +145,9 @@ function timer_start() {
 function timer_stop() {
     console.log('stop timer')
     clearInterval(intervalId);
+    gameRunning = false
 }
+
 
 function gameloop(){
     //draw the previous board state
@@ -165,21 +173,8 @@ function gameloop(){
 
     //check if the game needs to end
     if(numPlayersRemaining < 2){
-        
         emitMessage(`${winner} Wins!`)
         timer_stop()
-        document.getElementById("startButton").classList.toggle(`hidden`,false)
-        
+        document.getElementById("startButton").classList.toggle(`hidden`,false) 
     }
-
-    
-
 }
-
-
-
-
-
-
-
-

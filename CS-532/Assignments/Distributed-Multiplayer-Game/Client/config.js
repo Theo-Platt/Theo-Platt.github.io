@@ -2,6 +2,7 @@ socket = io();
 debug=false
 numRows=100
 numCols=100
+role = undefined
 
 // Direction Enum
 direction = {
