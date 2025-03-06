@@ -126,7 +126,7 @@ const yellow = (x)=>{return `\x1b[33m${x}\x1b[0m`};
 console.greenlog = (x)=>{if(x!=undefined){console.log(green(x))}else{console.log()}}
 console.logSocketData = ()=>{
     console.clear()
-    console.greenlog(``)
+    console.log(`Distributed Multiplayer Game`)
     console.greenlog(`Total clients: ${blue(Object.keys(sockmap).length)}`)
     console.greenlog(`Total rooms:   ${blue(Object.keys(hosts).length)}`)
     console.greenlog(``)
