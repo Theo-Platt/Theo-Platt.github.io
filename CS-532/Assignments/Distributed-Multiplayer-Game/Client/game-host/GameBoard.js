@@ -95,7 +95,11 @@ class GameBoard{
 
         this.#setPosition(k,id,value)
         return true
+
+        
     }
+
+
 
     passTime(){
         for(let k of Object.keys(this.boardState)){

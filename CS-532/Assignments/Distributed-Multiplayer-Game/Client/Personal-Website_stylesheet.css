@@ -104,6 +104,7 @@ header {
     width:100%;
     height:10%;
     min-height: 5vw;
+    max-height: 15px;
     top:0;
     left:0;
     font-size: 2vh;

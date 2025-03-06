@@ -2,7 +2,7 @@
 const starter = {
     "P1":{"name":"Player1", "dir":direction.RIGHT, "posX":2,         "posY":2},
     "P2":{"name":"Player2", "dir":direction.LEFT,  "posX":numRows-3, "posY":numCols-3},
-    "P3":{"name":"Player3", "dir":direction.LEFT,  "posX":numRows-3, "posY":2},
+    "P3":{"name":"Player3", "dir":direction.DOWN,  "posX":numRows-3, "posY":2},
     "P4":{"name":"Player4", "dir":direction.UP,    "posX":2,         "posY":numCols-3}
 }
 let intervalId=null;

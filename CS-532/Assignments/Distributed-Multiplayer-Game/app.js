@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const path = require('path');
 const port = 3500
+const useLogSocketData = true
 
 
 //middleware
@@ -22,11 +23,13 @@ let hosts = {}
 let sockmap = {}
 io.on('connection', (socket) => {
     
+    
     // When a user connects, assign them a room and make them host if needed.
     socket.emit('request fragment')
     socket.on('request fragment',(frag)=>{
         socket.join(`#${frag}`)
         let room = Array.from(socket.rooms)[1]
+        sockmap[socket.id] = room
         if(hosts[room]==null || hosts[room]==undefined){
             hosts[room]=socket.id
             socket.emit('Host Notification')
@@ -35,23 +38,28 @@ io.on('connection', (socket) => {
         }
         socket.emit('Chatbox Message',{ str:`Joined room '${frag}'.` })
         
+        
     })
 
     // When a user disconnects, remove them from their room and migrate hosts if needed.
     socket.on('closing', () => {
-        
+        delete sockmap[socket.id]
         let room = Array.from(socket.rooms)[1]
         let host = hosts[`${room}`]
         if(host==socket.id){
-            console.log(`\nMigrating Host for ${room}`)
-            hosts[room]=null
+            if(!useLogSocketData) console.log(`\nMigrating Host for ${room}`)
+            else console.logSocketData()
+            delete hosts[room]
             io.to(`${room}`).emit('Host Migration')
         }
         else{
             io.to(host).emit('player disconnect', socket.id)
         }
-        if(host!=null)
-            console.log(`${socket.id} has disconnected from ${room}`)
+        if(host!=null && host!=undefined){
+            if(!useLogSocketData)console.log(`${socket.id} has disconnected from ${room}`)
+            else console.logSocketData()
+        }
+        
     });
 
 
@@ -87,7 +95,6 @@ io.on('connection', (socket) => {
         let room = Array.from(socket.rooms)[1]
         let host = hosts[`${room}`]
         io.to(host).emit('input', newmsg)
-        console.log(`${newmsg} in room ${room} hosted by ${host}`)
     })
 
     // Game Joining 
@@ -95,11 +102,13 @@ io.on('connection', (socket) => {
         let room = Array.from(socket.rooms)[1]
         let host = hosts[`${room}`]
         io.to(host).emit('Join Game', socket.id)
-        if(socket.id == host)
-            console.log(`Client '${socket.id}' joined ${room} as host`)
-        else
-            console.log(`Client '${socket.id}' joined ${room} hosted by '${hosts[room]}'`)
-    })
+        if(!useLogSocketData){
+            if(socket.id == host)
+                console.log(`Client '${socket.id}' joined ${room} as host`)
+            else
+                console.log(`Client '${socket.id}' joined ${room} hosted by '${hosts[room]}'`)    
+        }else console.logSocketData()
+        })
 
     
 });
@@ -108,3 +117,29 @@ io.on('connection', (socket) => {
 http.listen(port, () => {
     console.log(`Distributed-Multiplayer-Game Server Listening on port ${port}`)
 })
+
+
+//just having some fun messing with console stuff. not part of the game really
+const blue = (x)=>{return `\x1b[34m${x}\x1b[0m`};
+const green = (x)=>{return `\x1b[32m${x}\x1b[0m`};
+const yellow = (x)=>{return `\x1b[33m${x}\x1b[0m`};
+console.greenlog = (x)=>{if(x!=undefined){console.log(green(x))}else{console.log()}}
+console.logSocketData = ()=>{
+    console.clear()
+    console.greenlog(``)
+    console.greenlog(`Total clients: ${blue(Object.keys(sockmap).length)}`)
+    console.greenlog(`Total rooms:   ${blue(Object.keys(hosts).length)}`)
+    console.greenlog(``)
+    for(const [room,host] of Object.entries(hosts)){
+        let count = 0
+        for(const [client,c_room] of Object.entries(sockmap))
+            if(c_room==room)
+                count++
+
+        console.greenlog(`Room:      ${yellow(room)}`)
+        console.greenlog(`| Host ID: ${blue(host)}`)
+        console.greenlog(`| Clients: ${blue(count)}`)
+        
+        console.greenlog()
+    }
+}
