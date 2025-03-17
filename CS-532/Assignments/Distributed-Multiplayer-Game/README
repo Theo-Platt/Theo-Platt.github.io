@@ -1,17 +1,37 @@
 Author: Theo Platt
 Course: CS-532-M01 Modern Web Technologies; Dr. Bill Hamilton
-Assignment: Individual Assignment: Simple Multiplayer Game
-Deadline: 03/03/2025
-GitHub Pages: https://theo-platt.github.io/CS-532/Assignments/Simple-Multiplayer-Game/
-Description:  In this assignment I create a simple multiplayer game which allows two players to compete in a game of snek.
-Files included:
-    /readme.txt 
-    /index.html 
-    /stylesheet.css 
-    /Personal-Website_stylesheet.css
-    /favicon.png
-    /gameScript.js 
+Assignment: Individual Assignment: Distributed Multiplayer Game
+Deadline: 03/19/2025
+Description: This assignment builds upon the Simple Multiplayer Game assignment. 
 
-How to play: Players control a snek (legally distinct from snake) that moves forward and leaves a tail wherever it goes. If a player collides with any snek, or a map edge they lose.
-Player 1 Controls: wasd
-Player 2 Controls: arrow keys
+Changelog:
+ - Complete rewrite of the internal gameboard datastructure
+ - Distributed core functions across mulitiple files for readability
+ - added distributed multiplayer
+ - - Multi-room support. Rooms can be joined by adding "#roomName" to the end of the url. (#default is joined if no pound sign is present in the url)
+ - - First client to join a room is host, all game logic runs on the host client.
+ - - up to 4 clients may play together in a room. Additional clients who join may spectate.
+ - - All players now use arrow keys to control their Snek
+ - - When player client leave, the host "opens" that player slot so that the next client to connect becomes a player.
+ - - When host client leaves, all other clients in that room have their pages refreshed to "migrate hosts"
+ - app.js prints colorful output tracking rooms/clients present
+ - The developer consumed many snacks during the making of this game. (monching 'chips ahoy!' as I write this changelog)
+
+Files included:
+ - readme: This file.
+ - package.json: Node package file.
+ - app.js: express node app.
+ - Client/: directory for all client-side html/css/js/favicon.
+ - Client/public/: directory of .js files needed by all clients.
+ - Client/game-host/: directory of .js files needed by the game-host client.
+
+Installation: 
+ - npm version: 10.7.0
+ - cmd: npm install
+
+Execution:
+ - cmd: node app.js
+ - url: localhost:3500/#roomName
+
+Ports:
+ - 3500
